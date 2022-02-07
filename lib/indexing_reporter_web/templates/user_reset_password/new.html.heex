@@ -1,15 +1,22 @@
-<h1>Forgot your password?</h1>
+<div class="mx-auto border-2 rounded w-full lg:w-1/3 p-8">
 
-<.form let={f} for={:user} action={Routes.user_reset_password_path(@conn, :create)}>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
+  <h1 class="mt-1 mb-3">Forgot your password?</h1>
 
-  <div>
-    <%= submit "Send instructions to reset password" %>
-  </div>
-</.form>
+  <p class="text-lg text-gray-700">
+    Please contact me (Ashton Wiersdorf) over the ward Slack channel. I'll reset it for you.
+  </p>
+</div>
 
-<p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
-</p>
+<%# <.form let={f} for={:user} action={Routes.user_reset_password_path(@conn, :create)}> %>
+<%#      <%= label f, :email %>
+<%#      <%= email_input f, :email, required: true %>
+
+<%#      <div> %>
+<%#      <%= submit "Send instructions to reset password" %>
+<%#      </div> %>
+<%#      </.form> %>
+
+<%#      <p> %>
+<%#      <%= link "Register", to: Routes.user_registration_path(@conn, :new) %>
+<%#      <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
+<%#      </p> %>

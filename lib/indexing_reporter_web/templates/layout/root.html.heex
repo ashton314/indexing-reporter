@@ -11,11 +11,13 @@
   </head>
   <body>
     <header>
-      <section class="lg:flex lg:items-center lg:justify-between my-4 px-3 pb-3 border-b-2">
-        <div class="block mt-4 lg:inline-block lg:mt-0 text-2xl flex-auto">Index Reporter</div>
-        <nav class="">
-          <%= render "_user_menu.html", assigns %>
-        </nav>
+      <section class="lg:flex lg:justify-center my-4 px-3 pb-3 border-b-2">
+        <div class="lg:flex lg:w-2/3 lg:justify-between lg:items-center">
+          <div class="block mt-4 lg:inline-block lg:mt-0 text-2xl flex-none"><a href="/" class="font-medium text-gray-800 border-none hover:text-gray-700 hover:border-blue-200 hover:border-b-2">Index Reporter</a></div>
+          <nav class="block lg:inline-block flex-none">
+            <%= render "_user_menu.html", assigns %>
+          </nav>
+        </div>
       </section>
     </header>
     <%= @inner_content %>

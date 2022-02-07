@@ -1,26 +1,34 @@
-<h1 class="text-2xl">Register</h1>
+<div class="mx-auto border-2 rounded w-full lg:w-1/3 p-8">
 
-<.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)} class="mx-auto border-1">
+  <h1 class="mt-1 mb-3">Register</h1>
+
+  <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
 
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
-
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
-
-  <div>
-    <%= submit "Register" %>
+  <div class="my-2">
+    <%= label f, :email, class: "block text-sm font-medium text-gray-700" %>
+    <%= email_input f, :email, required: true, class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :email %>
   </div>
-</.form>
 
-<p>
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %> |
-  <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
-</p>
+  <div class="my-2">
+    <%= label f, :password, class: "block text-sm font-medium text-gray-700" %>
+    <%= password_input f, :password, required: true, class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div class="my-3">
+    <%= submit "Register", class: "rounded-full bg-green-600 hover:bg-green-700 p-3 text-white" %>
+  </div>
+  </.form>
+
+  <p class="mt-4">
+    <%= link "Log in", to: Routes.user_session_path(@conn, :new) %> |
+    <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
+  </p>
+
+</div>

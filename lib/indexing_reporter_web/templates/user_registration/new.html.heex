@@ -10,6 +10,12 @@
   <% end %>
 
   <div class="my-2">
+    <%= label f, :name, class: "block text-sm font-medium text-gray-700" %>
+    <%= text_input f, :name, required: true, class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md", placeholder: "Jill & Jack Hill" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="my-2">
     <%= label f, :email, class: "block text-sm font-medium text-gray-700" %>
     <%= email_input f, :email, required: true, class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
     <%= error_tag f, :email %>

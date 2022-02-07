@@ -3,6 +3,7 @@ defmodule IndexingReporter.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
+    field :name, :string
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
@@ -30,9 +31,16 @@ defmodule IndexingReporter.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:name, :email, :password])
+    |> validate_name()
     |> validate_email()
     |> validate_password(opts)
+  end
+
+  defp validate_name(changeset) do
+    changeset
+    |> validate_required([:name])
+    |> validate_length(:name, max: 160)
   end
 
   defp validate_email(changeset) do
@@ -76,10 +84,12 @@ defmodule IndexingReporter.Accounts.User do
   """
   def email_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email])
+    |> cast(attrs, [:name, :email])
     |> validate_email()
+    |> validate_name()
     |> case do
       %{changes: %{email: _}} = changeset -> changeset
+      %{changes: %{name: _}} = changeset -> changeset
       %{} = changeset -> add_error(changeset, :email, "did not change")
     end
   end

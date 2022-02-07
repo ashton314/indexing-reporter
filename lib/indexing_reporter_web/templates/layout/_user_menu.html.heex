@@ -1,0 +1,10 @@
+<ul>
+<%= if @current_user do %>
+  <li class="block mt-4 lg:inline-block lg:mt-0 flex-auto mx-2"><%= @current_user.email %></li>
+  <li class="block mt-4 lg:inline-block lg:mt-0 flex-auto mx-2"><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
+  <li class="block mt-4 lg:inline-block lg:mt-0 flex-auto mx-2"><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+<% else %>
+  <li class="block mt-4 lg:inline-block lg:mt-0 flex-auto mx-2"><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+  <li class="block mt-4 lg:inline-block lg:mt-0 flex-auto mx-2"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+<% end %>
+</ul>

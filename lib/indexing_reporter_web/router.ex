@@ -84,9 +84,9 @@ defmodule IndexingReporterWeb.Router do
     scope "/", IndexingReporterWeb do
       pipe_through [:browser, :require_authenticated_user]
 
-      live "/logbook", IndexLogLive.Index, :index
-      live "/logbook/new", IndexLogLive.Index, :new
-      live "/logbook/:id/edit", IndexLogLive.Index, :edit
+      live "/logbook", IndexLogLive.Index, :index, container: {:main, class: "container w-full px-1"}
+      live "/logbook/new", IndexLogLive.Index, :new, container: {:main, class: "container w-full px-1"}
+      live "/logbook/:id/edit", IndexLogLive.Index, :edit, container: {:main, class: "container w-full px-1"}
 
       # live "/index_logs/:id", IndexLogLive.Show, :show
       # live "/index_logs/:id/show/edit", IndexLogLive.Show, :edit

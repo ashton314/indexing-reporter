@@ -14,7 +14,7 @@ defmodule IndexingReporter.Logbook.IndexLog do
   @doc false
   def changeset(index_log, attrs) do
     index_log
-    |> cast(attrs, [:date, :count, :remarks])
-    |> validate_required([:date, :count, :remarks])
+    |> cast(attrs, [:user_id, :date, :count, :remarks])
+    |> validate_required([:user_id, :date, :count])
   end
 end

@@ -4,7 +4,7 @@ defmodule IndexingReporterWeb.IndexLogLive.FormComponent do
   alias IndexingReporter.Logbook
 
   @impl true
-  def update(%{index_log: index_log} = assigns, socket) do
+  def update(%{index_log: index_log, current_user: _user} = assigns, socket) do
     changeset = Logbook.change_index_log(index_log)
 
     {:ok,
@@ -28,7 +28,7 @@ defmodule IndexingReporterWeb.IndexLogLive.FormComponent do
   end
 
   defp save_index_log(socket, :edit, index_log_params) do
-    case Logbook.update_index_log(socket.assigns.index_log, index_log_params) do
+    case Logbook.update_index_log(socket.assigns.current_user, socket.assigns.index_log, index_log_params) do
       {:ok, _index_log} ->
         {:noreply,
          socket
@@ -41,7 +41,7 @@ defmodule IndexingReporterWeb.IndexLogLive.FormComponent do
   end
 
   defp save_index_log(socket, :new, index_log_params) do
-    case Logbook.create_index_log(index_log_params) do
+    case Logbook.create_index_log(socket.assigns.current_user, index_log_params) do
       {:ok, _index_log} ->
         {:noreply,
          socket

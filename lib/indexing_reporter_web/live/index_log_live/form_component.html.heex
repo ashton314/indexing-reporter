@@ -1,4 +1,4 @@
-<div>
+<div class="mx-auto w-full lg:w-2/3 pb-8">
   <h2><%= @title %></h2>
 
   <.form
@@ -9,16 +9,20 @@
     phx-change="validate"
     phx-submit="save">
 
-    <%= label f, :count %>
-    <%= number_input f, :count %>
+  <div class="my-2">
+    <%= label f, :count, class: "block text-sm font-medium text-gray-700" %>
+    <%= number_input f, :count, class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
     <%= error_tag f, :count %>
+  </div>
 
-    <%= label f, :remarks %>
-    <%= textarea f, :remarks %>
+  <div class="my-2">
+    <%= label f, :remarks, class: "block text-sm font-medium text-gray-700" %>
+    <%= textarea f, :remarks, class: "focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
     <%= error_tag f, :remarks %>
+  </div>
 
-    <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
-    </div>
+  <div class="mt-4">
+    <%= submit "Save", phx_disable_with: "Saving...", class: "rounded-full bg-green-600 hover:bg-green-700 px-3 py-2 text-white" %>
+  </div>
   </.form>
 </div>

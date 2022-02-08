@@ -25,6 +25,7 @@ defmodule IndexingReporterWeb.IndexLogLive.Index do
     socket
     |> assign(:page_title, "New Index log")
     |> assign(:index_log, %IndexLog{})
+    |> assign(:current_user, socket.assigns.current_user)
   end
 
   defp apply_action(socket, :index, _params) do

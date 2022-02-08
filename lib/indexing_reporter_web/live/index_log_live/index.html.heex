@@ -9,35 +9,37 @@
       action={@live_action}
       index_log={@index_log}
       return_to={Routes.index_log_index_path(@socket, :index)}
+      current_user={@current_user}
     />
   </.modal>
 <% end %>
 
-<table class="table-auto">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Count</th>
-      <th>Remarks</th>
+<div class="flex w-full">
+  <table class="table-auto w-full">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Count</th>
+        <th>Remarks</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="index_logs">
-    <%= for index_log <- @index_logs do %>
-      <tr id={"index_log-#{index_log.id}"}>
-        <td><%= index_log.date %></td>
-        <td><%= index_log.count %></td>
-        <td><%= index_log.remarks %></td>
-
-        <td>
-          <!-- <span><%= live_redirect "Show", to: Routes.index_log_show_path(@socket, :show, index_log) %></span> -->
-          <span><%= live_patch "Edit", to: Routes.index_log_index_path(@socket, :edit, index_log) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: index_log.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody id="index_logs">
+      <%= for index_log <- @index_logs do %>
+        <tr id={"index_log-#{index_log.id}"}>
+          <td><%= index_log.date %></td>
+          <td><%= index_log.count %></td>
+          <td><%= index_log.remarks %></td>
+
+          <td>
+            <span><%= live_patch "Edit", to: Routes.index_log_index_path(@socket, :edit, index_log) %></span>
+            <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: index_log.id, data: [confirm: "Are you sure?"] %></span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <span><%= live_patch "New Index log", to: Routes.index_log_index_path(@socket, :new) %></span>

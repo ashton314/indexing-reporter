@@ -52,9 +52,11 @@ defmodule IndexingReporter.Logbook do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_index_log(attrs \\ %{}) do
+  def create_index_log(user, attrs \\ %{}) do
+    date = Date.utc_today()
     %IndexLog{}
-    |> IndexLog.changeset(attrs)
+    |> IndexLog.changeset(Map.merge(attrs, %{"user_id" => user.id, "date" => date}))
+    |> IO.inspect(label: "changeset")
     |> Repo.insert()
   end
 
@@ -70,9 +72,10 @@ defmodule IndexingReporter.Logbook do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_index_log(%IndexLog{} = index_log, attrs) do
+  def update_index_log(user, %IndexLog{} = index_log, attrs) do
+    date = Date.utc_today()
     index_log
-    |> IndexLog.changeset(attrs)
+    |> IndexLog.changeset(%{attrs | "user_id" => user.id, "date" => date})
     |> Repo.update()
   end
 

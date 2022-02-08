@@ -80,6 +80,19 @@ defmodule IndexingReporterWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
+  live_session :default, on_mount: IndexingReporterWeb.UserLiveAuth do
+    scope "/", IndexingReporterWeb do
+      pipe_through [:browser, :require_authenticated_user]
+
+      live "/logbook", IndexLogLive.Index, :index
+      live "/logbook/new", IndexLogLive.Index, :new
+      live "/logbook/:id/edit", IndexLogLive.Index, :edit
+
+      # live "/index_logs/:id", IndexLogLive.Show, :show
+      # live "/index_logs/:id/show/edit", IndexLogLive.Show, :edit
+    end
+  end
+
   scope "/", IndexingReporterWeb do
     pipe_through [:browser]
 

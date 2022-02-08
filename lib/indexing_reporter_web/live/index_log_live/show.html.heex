@@ -1,0 +1,36 @@
+<h1>Show Index log</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.index_log_show_path(@socket, :show, @index_log)}>
+    <.live_component
+      module={IndexingReporterWeb.IndexLogLive.FormComponent}
+      id={@index_log.id}
+      title={@page_title}
+      action={@live_action}
+      index_log={@index_log}
+      return_to={Routes.index_log_show_path(@socket, :show, @index_log)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @index_log.date %>
+  </li>
+
+  <li>
+    <strong>Count:</strong>
+    <%= @index_log.count %>
+  </li>
+
+  <li>
+    <strong>Remarks:</strong>
+    <%= @index_log.remarks %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.index_log_show_path(@socket, :edit, @index_log), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.index_log_index_path(@socket, :index) %></span>

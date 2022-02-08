@@ -1,0 +1,43 @@
+<h1 class="my-3">Listing Index logs</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.index_log_index_path(@socket, :index)}>
+    <.live_component
+      module={IndexingReporterWeb.IndexLogLive.FormComponent}
+      id={@index_log.id || :new}
+      title={@page_title}
+      action={@live_action}
+      index_log={@index_log}
+      return_to={Routes.index_log_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table class="table-auto">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Count</th>
+      <th>Remarks</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="index_logs">
+    <%= for index_log <- @index_logs do %>
+      <tr id={"index_log-#{index_log.id}"}>
+        <td><%= index_log.date %></td>
+        <td><%= index_log.count %></td>
+        <td><%= index_log.remarks %></td>
+
+        <td>
+          <!-- <span><%= live_redirect "Show", to: Routes.index_log_show_path(@socket, :show, index_log) %></span> -->
+          <span><%= live_patch "Edit", to: Routes.index_log_index_path(@socket, :edit, index_log) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: index_log.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Index log", to: Routes.index_log_index_path(@socket, :new) %></span>

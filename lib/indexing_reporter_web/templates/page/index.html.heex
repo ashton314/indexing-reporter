@@ -1,5 +1,5 @@
 <%= if @current_user do %>
-  Recording goes here.
+  You're probably looking for the <a href="/logbook">Dashboard</a>.
 <% else %>
   Please <%= link "log in", to: Routes.user_session_path(@conn, :new) %> or <%= link "register", to: Routes.user_registration_path(@conn, :new) %> to get started.
 <% end %>

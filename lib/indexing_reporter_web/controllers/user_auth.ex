@@ -139,6 +139,18 @@ defmodule IndexingReporterWeb.UserAuth do
     end
   end
 
+  def require_admin_user(conn, _opts) do
+    if conn.assigns[:current_user].adminp do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized to view this resource")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.index_log_index_path(conn, :index))
+      |> halt()
+    end
+  end
+
   defp maybe_store_return_to(%{method: "GET"} = conn) do
     put_session(conn, :user_return_to, current_path(conn))
   end

@@ -91,6 +91,10 @@ defmodule IndexingReporterWeb.Router do
       # live "/index_logs/:id", IndexLogLive.Show, :show
       # live "/index_logs/:id/show/edit", IndexLogLive.Show, :edit
     end
+
+    scope "/admin", IndexingReporterWeb do
+      pipe_through [:browser, :require_authenticated_user, :require_admin_user]
+    end
   end
 
   scope "/", IndexingReporterWeb do

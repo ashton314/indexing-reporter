@@ -29,10 +29,14 @@ defmodule IndexingReporterWeb.IndexLogLive.Index do
   end
 
   defp apply_action(socket, :index, _params) do
+    logs = Logbook.list_index_logs(socket.assigns.current_user.id)
+    total = logs |> Enum.reduce(0, fn %IndexLog{count: c}, acc -> c + acc end)
+
     socket
     |> assign(:page_title, "Listing Indexing logs")
     |> assign(:index_log, nil)
-    |> assign(:index_logs, Logbook.list_index_logs(socket.assigns.current_user.id))
+    |> assign(:index_logs, logs)
+    |> assign(:total_indexing, total)
   end
 
   @impl true

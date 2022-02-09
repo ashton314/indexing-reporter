@@ -1,4 +1,5 @@
 <h1 class="my-3">Listing Index logs</h1>
+<h3 class="my-3">Total: <%= @total_indexing %></h3>
 
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.index_log_index_path(@socket, :index)}>
@@ -17,7 +18,7 @@
 <div class="flex w-full">
   <table class="table-auto w-full">
     <thead>
-      <tr>
+      <tr class="border-b-2 border-slate-300">
         <th>Date</th>
         <th>Count</th>
         <th>Remarks</th>
@@ -27,13 +28,13 @@
     </thead>
     <tbody id="index_logs">
       <%= for index_log <- @index_logs do %>
-        <tr id={"index_log-#{index_log.id}"}>
-          <td><%= index_log.date %></td>
-          <td><%= index_log.count %></td>
-          <td><%= index_log.remarks %></td>
+        <tr id={"index_log-#{index_log.id}"} class="border-b border-slate-200">
+          <td class="p-4"><%= index_log.date %></td>
+          <td class="p-4"><%= index_log.count %></td>
+          <td class="p-4"><%= index_log.remarks %></td>
 
-          <td>
-            <span><%= live_patch "Edit", to: Routes.index_log_index_path(@socket, :edit, index_log) %></span>
+          <td class="p-4">
+            <span class="mr-2"><%= live_patch "Edit", to: Routes.index_log_index_path(@socket, :edit, index_log) %></span>
             <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: index_log.id, data: [confirm: "Are you sure?"] %></span>
           </td>
         </tr>
@@ -42,4 +43,4 @@
   </table>
 </div>
 
-<span><%= live_patch "New Index log", to: Routes.index_log_index_path(@socket, :new) %></span>
+<div class="mt-6"><%= live_patch "New Index log", to: Routes.index_log_index_path(@socket, :new), class: "border-none rounded-full bg-green-600 hover:bg-green-700 px-3 py-2 text-white hover:text-gray-100" %></div>

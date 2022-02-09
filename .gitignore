@@ -32,3 +32,8 @@ indexing_reporter-*.tar
 npm-debug.log
 /assets/node_modules/
 
+/priv/static/*.txt.gz
+/priv/static/*.txt
+/priv/static/*.ico
+/priv/static/*.png
+/priv/static/images/*.png

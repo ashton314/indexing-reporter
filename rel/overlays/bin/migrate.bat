@@ -1,0 +1,1 @@
+call "%~dp0\indexing_reporter" eval IndexingReporter.Release.migrate

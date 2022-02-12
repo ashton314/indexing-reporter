@@ -94,6 +94,8 @@ defmodule IndexingReporterWeb.Router do
 
     scope "/admin", IndexingReporterWeb do
       pipe_through [:browser, :require_authenticated_user, :require_admin_user]
+
+      live "/", AdminIndexLive.AdminIndex, :index, container: {:main, class: "container w-full px-1"}
     end
   end
 

@@ -26,6 +26,20 @@ defmodule IndexingReporter.Accounts do
     Repo.get_by(User, email: email)
   end
 
+  def make_admin_by_email(email) when is_binary(email) do
+    with %User{} = u <- Repo.get_by(User, email: email),
+         cs <- Ecto.Changeset.change(u, adminp: true) do
+      Repo.update!(cs)
+    end
+  end
+
+  def revoke_admin_by_email(email) when is_binary(email) do
+    with %User{} = u <- Repo.get_by(User, email: email),
+         cs <- Ecto.Changeset.change(u, adminp: false) do
+      Repo.update!(cs)
+    end
+  end
+
   @doc """
   Gets a user by email and password.
 

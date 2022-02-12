@@ -1,2 +1,23 @@
 <h1 class="my-3">Top Indexers</h1>
 <h3 class="my-3">Total names indexed: <%= @total_indexing %></h3>
+
+<div class="flex w-full">
+  <table class="table-auto w-full">
+    <thead>
+      <tr class="border-b-2 border-slate-300">
+        <th>Name</th>
+        <th>Email</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="index_logs">
+      <%= for l <- @listing do %>
+        <tr id={"index_log-#{l.id}"} class="border-b border-slate-200">
+          <td class="p-4"><%= l.name %></td>
+          <td class="p-4"><%= l.email %></td>
+          <td class="p-4"><%= l.total %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
